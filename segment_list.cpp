@@ -5,6 +5,8 @@
 #define MIN(a,b) (a>b) ? b : a
 #define MAX(a,b) (a>b) ? a : b
 
+typedef std::pair<uint32_t,uint32_t> Segment;
+
 struct SegmentNode {
 	uint32_t m_lowerLimit;
 	uint32_t m_upperLimit;
@@ -261,6 +263,18 @@ std::string DisjointSegmentList::to_str() {
 	return output;
 }
 
+std::vector<Segment > DisjointSegmentList::get_segments() const {
+	std::vector<Segment> output;
+	std::shared_ptr<SegmentNode> current_node = m_head;
+	while (current_node) {
+		Segment p(current_node->m_lowerLimit,current_node->m_upperLimit);
+		output.push_back(p);
+		current_node = current_node->m_child;
+	}
+	
+	return output;
+}
+
 void DisjointSegmentList::destroy_list(std::shared_ptr<SegmentNode> node) {
 	if(node) {
 		if (node->m_child) {
@@ -283,13 +297,12 @@ std::shared_ptr<SegmentNode> DisjointSegmentList::copy_list(std::shared_ptr<Segm
 	return new_list;
 }
 
-#define TEST
+//define TEST
 #ifdef TEST
 int main() {
 	DisjointSegmentList a;
 	a.add_segment(10,20);
 	a.add_segment (35,42);
-	a.translate(11,false);
 	std::cout<<a.to_str()<<std::endl;
 	a.translate(30,false);
 	std::cout<<a.to_str()<<std::endl;

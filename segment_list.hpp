@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <cstdint>
+#include <vector>
 
 //Stores a segment as a node of a list
 struct SegmentNode;
@@ -35,6 +36,8 @@ public:
 	DisjointSegmentList& operator= (const DisjointSegmentList& rhs);
 	
 	std::string to_str ();
+	
+	std::vector<std::pair<uint32_t,uint32_t> > get_segments() const;
 
 private:
 	std::shared_ptr<SegmentNode> m_head;
