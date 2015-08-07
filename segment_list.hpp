@@ -19,10 +19,10 @@ public:
 	~DisjointSegmentList ();
 	
 	//returns true if the list is empty
-	bool empty();
+	bool empty() const;
 	
 	//returns true if one of the segments contains value
-	bool contains (uint32_t value);
+	bool contains (uint32_t value) const;
 	
 	//Add a segment to the union
 	void add_segment (uint32_t lower_limit, uint32_t upper_limit);
@@ -35,7 +35,7 @@ public:
 	
 	DisjointSegmentList& operator= (const DisjointSegmentList& rhs);
 	
-	std::string to_str ();
+	std::string to_str () const;
 	
 	std::vector<std::pair<uint32_t,uint32_t> > get_segments() const;
 

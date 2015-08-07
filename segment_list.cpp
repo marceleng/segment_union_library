@@ -34,11 +34,11 @@ DisjointSegmentList::~DisjointSegmentList () {
 	if(m_head) { destroy_list(m_head); }
 }
 
-bool DisjointSegmentList::empty () { 
+bool DisjointSegmentList::empty () const { 
 	return (bool) m_head;
 }
 
-bool DisjointSegmentList::contains (uint32_t value) {
+bool DisjointSegmentList::contains (uint32_t value) const {
 	std::shared_ptr<SegmentNode> current_node = m_head;
 	while (current_node) {
 		if (value < current_node->m_lowerLimit) {
@@ -251,7 +251,7 @@ void DisjointSegmentList::reset_node(std::shared_ptr<SegmentNode> node) {
 	node.reset();
 }
 
-std::string DisjointSegmentList::to_str() {
+std::string DisjointSegmentList::to_str() const {
 	if (!m_head) { return "Empty list"; }
 	
 	std::string output;
