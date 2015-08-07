@@ -1,4 +1,5 @@
  * Add std::vector<std::pair<uint32_t,uint32_t get_segment> > get_segments()
  * Change uint32_t to template
+ * Add iterator
  * Add Makefile to create library
  * Change name to smthing smarter
