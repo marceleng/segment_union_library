@@ -4,8 +4,7 @@
 #include <utility>
 #include <memory>
 #include <string>
-
-typedef unsigned int uint32_t;
+#include <cstdint>
 
 //Stores a segment as a node of a list
 struct SegmentNode;
@@ -30,6 +29,8 @@ public:
 	void substract_segment (uint32_t lower_limit, uint32_t upper_limit);
 	//Intersect the union with a segment
 	void intersect_segment (uint32_t lower_limit, uint32_t upper_limit);
+	//Translate all the segments by value, either forward or backwards
+	void translate (uint32_t value,bool forward=true);
 	
 	DisjointSegmentList& operator= (const DisjointSegmentList& rhs);
 	
@@ -37,6 +38,11 @@ public:
 
 private:
 	std::shared_ptr<SegmentNode> m_head;
+	
+	void move_forward(uint32_t value);
+	void move_backwards(uint32_t value);
+	
+private:
 	static void update_relation(std::shared_ptr<SegmentNode> parent,
 								std::shared_ptr<SegmentNode> child);
 	static void reset_node(std::shared_ptr<SegmentNode> node);
