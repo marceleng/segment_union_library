@@ -35,7 +35,7 @@ DisjointSegmentList::~DisjointSegmentList () {
 }
 
 bool DisjointSegmentList::empty () const { 
-	return (bool) m_head;
+	return !((bool) m_head);
 }
 
 bool DisjointSegmentList::contains (uint32_t value) const {
@@ -186,7 +186,7 @@ void DisjointSegmentList::intersect_segment (uint32_t lower_limit, uint32_t uppe
 	m_head=intersect(m_head,seg);
 }
 
-void DisjointSegmentList::intersect_seglist (DisjointSegmentList& rhs) {
+void DisjointSegmentList::intersect_seglist (const DisjointSegmentList& rhs) {
 	m_head = intersect(m_head, rhs.m_head);
 }
 

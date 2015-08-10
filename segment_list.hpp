@@ -32,7 +32,7 @@ public:
 	void substract_seglist (const DisjointSegmentList& rhs);
 	//Intersect the union with a segment
 	void intersect_segment (uint32_t lower_limit, uint32_t upper_limit);
-	void intersect_seglist (DisjointSegmentList& rhs);
+	void intersect_seglist (const DisjointSegmentList& rhs);
 	//Translate all the segments by value, either forward or backwards
 	void translate (uint32_t value,bool forward=true);
 	
