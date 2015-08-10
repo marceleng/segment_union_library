@@ -26,10 +26,13 @@ public:
 	
 	//Add a segment to the union
 	void add_segment (uint32_t lower_limit, uint32_t upper_limit);
+	void add_seglist (const DisjointSegmentList& rhs);
 	//Differentiate the union from a segment
 	void substract_segment (uint32_t lower_limit, uint32_t upper_limit);
+	void substract_seglist (const DisjointSegmentList& rhs);
 	//Intersect the union with a segment
 	void intersect_segment (uint32_t lower_limit, uint32_t upper_limit);
+	void intersect_seglist (DisjointSegmentList& rhs);
 	//Translate all the segments by value, either forward or backwards
 	void translate (uint32_t value,bool forward=true);
 	
@@ -48,10 +51,18 @@ private:
 private:
 	static void update_relation(std::shared_ptr<SegmentNode> parent,
 								std::shared_ptr<SegmentNode> child);
-	static void reset_node(std::shared_ptr<SegmentNode> node);
+	static void reset_node(std::shared_ptr<SegmentNode>& node);
 	
 	static std::shared_ptr<SegmentNode> copy_list(std::shared_ptr<SegmentNode> old_list);
-	static void destroy_list(std::shared_ptr<SegmentNode> node);
+	static void destroy_list(std::shared_ptr<SegmentNode>& node);
+	static std::shared_ptr<SegmentNode> unify (std::shared_ptr<SegmentNode>& container,
+											const std::shared_ptr<SegmentNode>& to_add);
+	static std::shared_ptr<SegmentNode> differentiate(
+									std::shared_ptr<SegmentNode>& container,
+									const std::shared_ptr<SegmentNode>& to_substract);
+	static std::shared_ptr<SegmentNode> intersect (
+									std::shared_ptr<SegmentNode>& container,
+									const std::shared_ptr<SegmentNode>& to_intersect);
 };
 
 #endif
