@@ -1,6 +1,7 @@
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
 
+#include <stddef.h>
 #include "matrice.h"
 
 struct node {
@@ -26,4 +27,7 @@ node* node_alloc_urandom(double size_x, double size_y);
 
 double node_distance(node *x, node *y);
 
+void node_urandom_graph(size_t number_of_nodes, size_t density, node** nodes);
+
+void node_print (node *n);
 #endif

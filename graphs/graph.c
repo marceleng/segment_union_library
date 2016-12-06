@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <stdio.h>
 
 #include "graph.h"
 
@@ -10,7 +11,7 @@ static size_t ID = 0;
 
 double urandom_double(double min, double max)
 {
-	double shot = (double) rand() / (double)RAND_MAX;
+	double shot = (double) rand();
 	return shot*(max-min)/(double)RAND_MAX+min;
 }
 
@@ -89,3 +90,13 @@ void node_urandom_graph (size_t number_of_nodes, size_t density, node** nodes)
 		}
 	}
 }
+
+void node_print (node *n) {
+	printf("<Node %zu (%0.2f,%0.2f): {", n->id, n->x, n->y);
+	for (size_t i=0; i<n->number_of_neigh; i++) {
+		printf("%zu", (n->neigh[i])->id);
+		if (i<n->number_of_neigh-1)
+			printf(", ");
+	}
+	printf("}>\n");
+}	
