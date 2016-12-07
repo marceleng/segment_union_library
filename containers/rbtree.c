@@ -166,12 +166,12 @@ rbtree* _rbtree_rotate_right(rbtree *tree)
 }
 
 
-rbtree* rbtree_insert(rbtree *tree, void *item, size_t key)
+rbtree* rbtree_insert(rbtree *tree, void *item, key_t key)
 {
 	return rbtree_insert_policy(tree, item, key, DEFAULT_POLICY);
 }
 
-rbtree* rbtree_insert_policy(rbtree *tree, void *item, size_t key, int policy)
+rbtree* rbtree_insert_policy(rbtree *tree, void *item, key_t key, int policy)
 {
 	rbtree *node = rbtree_alloc();
 	node->key = key;
@@ -187,7 +187,6 @@ rbtree* rbtree_insert_policy(rbtree *tree, void *item, size_t key, int policy)
 	}
 	else {
 		while (node->parent && node->parent->color == COLOR_RED) {
-			/* TODO: Put breakpoint here and debug for x[i]=8 */
 			rbtree *u = _rbtree_u(node), *gp = _rbtree_gp(node), *p = node->parent;
 			if(u && u->color==COLOR_RED) {//parent and uncle are red-> switch them to black
 				node->parent->color = COLOR_BLACK;
@@ -207,7 +206,7 @@ rbtree* rbtree_insert_policy(rbtree *tree, void *item, size_t key, int policy)
 					p->color = COLOR_BLACK;
 					p->rchild->color = COLOR_RED;
 				}
-				else { /* p==gp->lchild */
+				else { /* p==gp->rchild */
 					if(node==p->lchild) {
 						_rbtree_rotate_right(node);
 						node = node->rchild;
@@ -229,7 +228,7 @@ rbtree* rbtree_insert_policy(rbtree *tree, void *item, size_t key, int policy)
 	return tree;
 }
 
-void _rbtree_flatten(rbtree *x, void **item_buffer, size_t *key_buffer, size_t *count)
+void _rbtree_flatten(rbtree *x, void **item_buffer, key_t *key_buffer, size_t *count)
 {
 	if (x) {
 		_rbtree_flatten(x->lchild, item_buffer, key_buffer, count);
@@ -239,7 +238,7 @@ void _rbtree_flatten(rbtree *x, void **item_buffer, size_t *key_buffer, size_t *
 	}
 }
 
-size_t rbtree_flatten(rbtree *x, void **item_buffer, size_t *key_buffer)
+size_t rbtree_flatten(rbtree *x, void **item_buffer, key_t *key_buffer)
 {
 	size_t count = 0;
 	_rbtree_flatten(x, item_buffer, key_buffer, &count);
@@ -250,7 +249,7 @@ void rbtree_flatprint(rbtree *x)
 {
 	if(x) {
 		rbtree_flatprint(x->lchild);
-		printf("%zu ", x->key);
+		printf("%u ", x->key);
 		rbtree_flatprint(x->rchild);
 	}
 }

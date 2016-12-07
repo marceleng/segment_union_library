@@ -10,9 +10,11 @@
 // Does not insert if item with same key found
 #define POLICY_IGNORE -1
 
+typedef unsigned int key_t;
+
 struct rbtree {
 	void *item;
-	size_t key;
+	key_t key;
 
 	int color;
 
@@ -27,12 +29,12 @@ rbtree* rbtree_alloc();
 void rbtree_free(rbtree* tree);
 
 void rbtree_flatprint(rbtree* tree);
-size_t rbtree_flatten(rbtree *x, void **item_buffer, size_t *key_buffer);
+size_t rbtree_flatten(rbtree *x, void **item_buffer, key_t *key_buffer);
 
-rbtree* rbtree_insert(rbtree *tree, void *item, size_t key);
-rbtree* rbtree_insert_policy(rbtree *tree, void *item, size_t key, int policy);
-rbtree* *rbtree_remove(rbtree *tree, size_t key, void* item);
-void *rbtree_search(rbtree *tree, size_t key);
+rbtree* rbtree_insert(rbtree *tree, void *item, key_t key);
+rbtree* rbtree_insert_policy(rbtree *tree, void *item, key_t key, int policy);
+//TODO: rbtree* *rbtree_remove(rbtree *tree, key_t key, void* item);
+void *rbtree_search(rbtree *tree, key_t key);
 
 size_t rbtree_size(rbtree *tree);
 
