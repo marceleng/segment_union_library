@@ -83,6 +83,7 @@ void node_urandom_graph (size_t number_of_nodes, size_t density, node** nodes)
 	
 	for (size_t i=0; i<number_of_nodes; i++) {
 		nodes[i] = node_alloc_urandom(space_size, space_size);
+		nodes[i].id = i;
 		for (size_t j=0; j<i; j++) {
 			if (node_distance(nodes[i], nodes[j]) < 1) {
 				node_add_vertice(nodes[i], nodes[j]);

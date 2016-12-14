@@ -150,7 +150,7 @@ int ll_isempty(llist_t *l) {
 void ll_empty(llist_t *l)
 {
 	struct ll_node *node = l->head;
-	while(node->child) {
+	while(node && node->child) {
 		node = node->child;
 		free(node->parent);
 	}
