@@ -33,8 +33,13 @@ size_t rbtree_flatten(rbtree *x, void **item_buffer, key_t *key_buffer);
 
 rbtree* rbtree_insert(rbtree *tree, void *item, key_t key);
 rbtree* rbtree_insert_policy(rbtree *tree, void *item, key_t key, int policy);
+int rbtree_verify(rbtree *tree);
 //TODO: rbtree* *rbtree_remove(rbtree *tree, key_t key, void* item);
 void *rbtree_search(rbtree *tree, key_t key);
+
+rbtree* rbtree_remove(rbtree *tree, key_t key, void **item);
+
+key_t rbtree_pop(rbtree *tree, void** item);
 
 size_t rbtree_size(rbtree *tree);
 
